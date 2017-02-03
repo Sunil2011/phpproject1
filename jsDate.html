@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Click the button to display the time.</p>
+
+<button onclick="myFunction()">Try it</button>
+<button onclick="Week_no()">Try it</button>
+<p id="demo"></p>
+<p id="dm"> </p>
+<script>
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+
+function myFunction() {
+    var d = new Date();
+    var x = document.getElementById("demo");
+    var Y = d.getFullYear();
+    var M = addZero(d.getMonth()+1);
+    var D = addZero(d.getDate());
+    var h = addZero(d.getHours());
+    var m = addZero(d.getMinutes());
+    var s = addZero(d.getSeconds());
+    x.innerHTML =  Y + "-" + M + "-" + D + " " + h + ":" + m + ":" + s;
+}
+ Date.prototype.getWeek = function() {
+        var onejan = new Date(this.getFullYear(), 0, 1);
+        return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+  }
+  
+function Week_no () {
+    var weekNumber = (new Date()).getWeek();
+    var x = document.getElementById("dm");
+    x.innerHTML = weekNumber ;
+    
+}
+</script>
+
+</body>
+</html>
+

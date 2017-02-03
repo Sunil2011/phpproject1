@@ -1,0 +1,91 @@
+
+<div class="col-sm-12">
+    <div class=" page-heading" id="page-heading">
+      <span>Products</span>
+    </div>
+    <panel panel-class="panel-sky"  class="ng-isolate-scope"> 
+        <div class="panel panel-sky" style="visibility: visible ;opacity: 1; display: block; transform: translateY(0px)">
+            
+            <div class="panel-heading  ">
+                
+                <span style="float: right" > 
+                    <button class="btn btn-sm btn-primary-alt btn-label btn-growsari" id="addProduct" type="button" style="margin: 5px" ng-click="addProduct()"> Add </button>  &nbsp;&nbsp;
+                    <button class="btn btn-sm btn-primary-alt btn-label btn-growsari" id="deleteProduct" type="button" style="margin: 5px" ng-click="deleteProducts()"> Delete </button>
+                </span>
+                
+                     
+            </div>
+            
+           
+            <div class = "form-horizontal panel-heading">
+                 
+                <h5>
+                    <label class="col-sm-1" style="padding-top: 5px"><b>Category</b> </label> &nbsp;
+                    <span class="col-sm-3">
+                       
+                        <select id="selectedCat" class="form-control" ng-model="selectedCat" ng-change="prodCatAndOrBrand(selectedCat, selectedBrand)" >
+                            <option value="0"> -- choose category -- </option>
+                            <option ng-repeat="item in cats " value="{{ item.category_id }}"> {{ item.category_name }} </option>
+                            
+                        </select>
+                    </span>
+                    
+                    <label class="col-sm-1" style="padding-top: 5px"><b>Brand</b> </label> &nbsp;
+                    <span class="col-sm-3">
+                       
+                        <select id="selectedCat" class="form-control" ng-model="selectedBrand" ng-change="prodCatAndOrBrand(selectedCat, selectedBrand)" >
+                            <option value="0"> -- choose category -- </option>
+                            <option ng-repeat="item in brds " value="{{ item.brand_id }}"> {{ item.brand_name }} </option>
+                            
+                        </select>
+                    </span>
+                </h5>
+            </div>
+             <!-- {{ selectedCat }} --{{selectedBrand}} -- {{ BasePath2Img }} -- {{ BaseUrl }} -- {{category_id}} -->
+              
+            <div class="panel-body" ng-transclude >
+                <div class="table-responsive ng-scope ">
+                                
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th > <input type="checkbox" id="ckbCheckAll"> </th>
+                                
+                                <th> Thumbnail </th>
+                                <th> SKU </th>
+                                <th> Volume </th>
+                                <th> Price </th>
+                                <th> SRP </th>
+                            </tr>
+                        </thead>
+                            
+                        <tbody>
+                            <tr ng-repeat="x in prd ">
+                                <td> <input type="checkbox" id="{{ x.id }}"  class="checkBoxClass" ng-model="bool" ng-checked="isChecked(x.id)" ng-change="selectProduct(bool, x.id)">  </td>
+                                
+                                <td><img ng-src="{{BasePath2Img}}/products/growsari.png" alt="growsari" style="width: 80px;height: 80px"/></td>
+                                <td> <a ng-href="" ng-click="editProduct( x.id )"> {{ x.sku }} </a></td>
+                                <td>{{ x.volume }}</td>
+                                <td>{{ x.price }}</td>
+                                <td>{{ x.srp }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                        
+                </div>
+            </div>
+            
+        </div>
+    </panel>
+  
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#ckbCheckAll").click(function () {
+        $(".checkBoxClass").prop('checked', $(this).prop('checked'));
+        });
+        
+        
+    });
+</script>
